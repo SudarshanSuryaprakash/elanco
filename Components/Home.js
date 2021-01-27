@@ -6,8 +6,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 export default Home = ({ navigation }) => {
   return (
     <LinearGradient
-      // Background Linear Gradient
-      colors={['#1E2923', '#08130D']}
+      colors={['#007965', '#00af91']}
+      //colors={['#1E2923', '#08130D']}
       style={{ flex: 1 }}
     >
       <View style={styles.container}>
@@ -16,13 +16,13 @@ export default Home = ({ navigation }) => {
         </View>
         <View style={styles.pillsContainer}>
           <TouchableOpacity
-            style={{ ...styles.costsButton, backgroundColor: 'red' }}
+            style={{ ...styles.costsButton, backgroundColor: '#c70039' }}
             onPress={() => navigation.navigate('Graph', { display: 'cost' })}
           >
             <Text style={styles.costsText}>Costs</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={{ ...styles.costsButton, backgroundColor: 'blue' }}
+            style={{ ...styles.costsButton, backgroundColor: '#19456b' }}
             onPress={() =>
               navigation.navigate('Graph', { display: 'quantity' })
             }
@@ -46,11 +46,14 @@ const styles = StyleSheet.create({
     //backgroundColor: 'black',
   },
   headContainer: {
+    marginTop: 20,
     height: 100,
     width: '100%',
-    backgroundColor: '#5ccc5a',
+    backgroundColor: '#80ffdb',
+    //backgroundColor: '#00af91',
     justifyContent: 'center',
     alignItems: 'center',
+    borderRadius: 10,
   },
   headText: {
     fontSize: 25,
@@ -63,7 +66,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   costsText: {
-    color: 'rgb(26, 255, 146)',
+    color: '#bee5d3',
+    fontWeight: 'bold',
+    fontSize: 20,
   },
   costsButton: {
     padding: 10,
@@ -72,7 +77,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 10,
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
-    width: 100,
+    width: 150,
     alignItems: 'center',
   },
 });

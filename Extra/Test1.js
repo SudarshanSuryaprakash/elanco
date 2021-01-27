@@ -26,6 +26,7 @@ export default function Graph({ navigation, route }) {
   const [raw, setRaw] = useState([]);
   const [resources, setResources] = useState([]);
   const [applications, setApplications] = useState([]);
+  const [mainFilteredResource, setMainFilteredResource] = useState({});
 
   const [resourceDetails, setResourceDetails] = useState({});
 
@@ -53,6 +54,28 @@ export default function Graph({ navigation, route }) {
   }, []);
 
   useEffect(() => {
+    if (applications.length > 0) {
+      //console.log(mainFilteredResource);
+      const obj = {};
+      for (let resource of Object.keys(mainFilteredResource)) {
+        //console.log(mainFilteredResource[resource]);
+        obj[resource] = {};
+        for (let key of mainFilteredResource[resource]) {
+          // console.log(key);
+
+          applications.forEach((application) => {
+            if (key.Tags['app-name'] === application) {
+              obj[resource] = application;
+              // obj[resource][application].cost += key.Cost;
+            }
+          });
+        }
+      }
+      console.log(obj);
+    }
+  }, [applications]);
+
+  useEffect(() => {
     let count = 0;
     let labels = [];
     resources.forEach(async (resource) => {
@@ -62,6 +85,11 @@ export default function Graph({ navigation, route }) {
       const filteredResource = raw.filter((item) => {
         return item.MeterCategory === resource;
       });
+      let obj1 = {};
+      obj1[resource] = filteredResource;
+      obj1 = Object.assign(mainFilteredResource, obj1);
+
+      setMainFilteredResource(obj1);
 
       let cost = 0;
       let quantity = 0;
@@ -103,12 +131,9 @@ export default function Graph({ navigation, route }) {
   };
 
   const chartConfig = {
-    // backgroundGradientFrom: '#1E2923',
-    // backgroundGradientTo: '#08130D',
-    backgroundGradientFrom: '#007965',
-    backgroundGradientTo: '#00af91',
-    //color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
-    color: (opacity = 1) => `#80ffdb`,
+    backgroundGradientFrom: '#1E2923',
+    backgroundGradientTo: '#08130D',
+    color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
   };
 
   useEffect(() => {
@@ -118,15 +143,15 @@ export default function Graph({ navigation, route }) {
         setFinalQuantityData(setData('quantity'));
         setFlag(true);
       }
-      if (route.params.display === 'cost') {
-        if (finalCostData[0] !== undefined && finished === false) {
-          let tc = 0;
-          finalCostData.map((item) => {
-            tc = tc + item;
-          });
-          setTotalCost(tc);
-          setFinished(true);
-        }
+      if ('LULU' === 'cost') {
+        //     if (finalCostData[0] !== undefined && finished === false) {
+        //       let tc = 0;
+        //       finalCostData.map((item) => {
+        //         tc = tc + item;
+        //       });
+        //       setTotalCost(tc);
+        //       setFinished(true);
+        //     }
       } else {
         if (finalQuantityData[0] !== undefined && finished === false) {
           let tc = 0;
@@ -140,50 +165,48 @@ export default function Graph({ navigation, route }) {
     }
   }, [resources, finalCostData, finalQuantityData]);
 
-  //console.log(flag);
+  console.log(flag);
 
   return (
     <LinearGradient
       // Background Linear Gradient
-      //colors={['#1E2923', '#08130D']}
-      colors={['#00af91', '#007965']}
+      colors={['#1E2923', '#08130D']}
       style={{ flex: 1 }}
     >
       <View style={styles.container}>
         {flag === true ? (
           <View>
-            <LineChart
+            {/* <LineChart
               data={setGraphData()}
               width={screenWidth}
-              height={screenHeight / 1}
+              height={screenHeight / 1.3}
               chartConfig={chartConfig}
               bezier
-            />
-            <TouchableOpacity
-              style={styles.legendButton}
-              onPress={() =>
-                navigation.navigate('Legend', {
-                  resources,
-                  finalCostData,
-                  finalQuantityData,
-                })
-              }
-            >
-              <Text style={styles.legendText}>Legend</Text>
-            </TouchableOpacity>
-
-            {route.params.display === 'cost' ? (
+            /> */}
+            {/* {route.params.display === 'cost' ? (
               <Text style={styles.totalText}>Total Cost: {totalCost}</Text>
             ) : (
               <Text style={styles.totalText}>
                 Total Quantity: {totalQuantity}
               </Text>
-            )}
+            )} */}
           </View>
         ) : (
-          <ActivityIndicator color='#433d3c' size='large' />
+          <ActivityIndicator color='green' size='large' />
         )}
-        <Text style={styles.note}>Note: these are discrete values.</Text>
+
+        <TouchableOpacity
+          style={styles.legendButton}
+          onPress={() =>
+            navigation.navigate('Legend', {
+              resources,
+              finalCostData,
+              finalQuantityData,
+            })
+          }
+        >
+          <Text style={styles.legendText}>Legend</Text>
+        </TouchableOpacity>
       </View>
     </LinearGradient>
   );
@@ -191,22 +214,18 @@ export default function Graph({ navigation, route }) {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: screenHeight / 9.6,
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
-    backgroundColor: '#00af91',
+    backgroundColor: 'rgb(10,10,10)',
   },
   legendText: {
-    // color: 'rgb(26, 255, 146)',
-    color: 'black',
-    fontWeight: 'bold',
+    color: 'rgb(26, 255, 146)',
   },
   legendButton: {
     position: 'absolute',
-    bottom: 500,
-    right: 30,
-    backgroundColor: '#80ffdb',
+    bottom: 70,
+    backgroundColor: 'green',
     padding: 10,
     borderTopRightRadius: 10,
     borderTopLeftRadius: 10,
@@ -214,18 +233,11 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 10,
   },
   totalText: {
-    color: '#80ffdb',
-    //color: 'rgb(26, 255, 146)',
+    color: 'green',
     position: 'absolute',
     right: 10,
     top: 20,
     fontWeight: 'bold',
     fontSize: 24,
-  },
-  note: {
-    bottom: 30,
-    right: 20,
-    position: 'absolute',
-    color: 'white',
   },
 });

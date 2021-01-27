@@ -9,6 +9,7 @@ import Graph from './Components/Graph';
 import Home from './Components/Home';
 import Legend from './Components/Legend';
 import ResourceDetails from './ResourceDetails';
+import Test1 from './Extra/Test1';
 
 const Stack = createStackNavigator();
 
@@ -24,7 +25,7 @@ export default function App() {
         options={() => ({
           title: 'Elanco',
           headerStyle: {
-            backgroundColor: 'black',
+            backgroundColor: '#433d3c',
           },
           headerTintColor: '#fff',
           headerTitleStyle: {
@@ -38,7 +39,7 @@ export default function App() {
         options={{
           title: 'Graphical representation',
           headerStyle: {
-            backgroundColor: 'black',
+            backgroundColor: '#433d3c',
           },
           headerTintColor: '#fff',
           headerTitleStyle: {
@@ -53,7 +54,7 @@ export default function App() {
         options={{
           title: 'Resource Legend',
           headerStyle: {
-            backgroundColor: 'black',
+            backgroundColor: '#433d3c',
           },
           headerTintColor: '#fff',
           headerTitleStyle: {
@@ -67,7 +68,7 @@ export default function App() {
         options={{
           title: 'Resource Detail',
           headerStyle: {
-            backgroundColor: 'black',
+            backgroundColor: '#433d3c',
           },
           headerTintColor: '#fff',
           headerTitleStyle: {
@@ -79,9 +80,11 @@ export default function App() {
   );
 
   return (
-    <LinearGradient colors={['#1E2923', '#08130D']} style={styles.background}>
+    <LinearGradient colors={['#f4f5db', '#d9dab0']} style={styles.background}>
+      {/* <LinearGradient colors={['#1E2923', '#08130D']} style={styles.background}> */}
       <NavigationContainer>{createHomeStack()}</NavigationContainer>
     </LinearGradient>
+    // <Test1 />
   );
 }
 

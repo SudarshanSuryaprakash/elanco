@@ -3,7 +3,6 @@ import {
   Text,
   View,
   StyleSheet,
-  FlatList,
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
@@ -35,7 +34,8 @@ export default Legend = ({ route, navigation }) => {
   return (
     <LinearGradient
       // Background Linear Gradient
-      colors={['#1E2923', '#08130D']}
+      // colors={['#1E2923', '#08130D']}
+      colors={['#00af91', '#007965']}
       style={{ flex: 1 }}
     >
       <View style={styles.mainContainer}>
@@ -55,17 +55,12 @@ export default Legend = ({ route, navigation }) => {
                 }
                 key={index}
               >
-                <Text>{item}</Text>
+                <Text style={styles.text}>{item}</Text>
               </TouchableOpacity>
             );
           })}
         </ScrollView>
       </View>
-      {/* <FlatList
-          data={numberedResources()}
-          renderItem={renderItem}
-          keyExtractor={(item) => item}
-        /> */}
     </LinearGradient>
   );
 };
@@ -89,7 +84,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
   },
   resourceButton: {
-    backgroundColor: '#8fcc5a',
+    //backgroundColor: '#8fcc5a',
+    backgroundColor: '#80ffdb',
     justifyContent: 'center',
     alignItems: 'center',
     height: 50,
@@ -101,5 +97,8 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 10,
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
+  },
+  text: {
+    fontWeight: 'bold',
   },
 });
