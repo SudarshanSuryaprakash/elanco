@@ -8,7 +8,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Graph from './Components/Graph';
 import Home from './Components/Home';
 import Legend from './Components/Legend';
-import ResourceDetails from './ResourceDetails';
+import ResourceDetails from './Components/ResourceDetails';
 import Test1 from './Extra/Test1';
 
 const Stack = createStackNavigator();
