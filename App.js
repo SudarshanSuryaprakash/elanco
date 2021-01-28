@@ -10,6 +10,8 @@ import Home from './Components/Home';
 import FirstScreen from './Components/FirstScreen';
 import Legend from './Components/Legend';
 import ResourceDetails from './Components/ResourceDetails';
+import ApplicationDeepDive from './Components/ApplicationDeepDive';
+import ShowResourcesInApplication from './Components/ShowResourcesInApplication';
 import Test1 from './Extra/Test1';
 
 const Stack = createStackNavigator();
@@ -40,6 +42,36 @@ export default function App() {
         component={Home}
         options={() => ({
           title: 'Elanco',
+          headerStyle: {
+            backgroundColor: '#433d3c',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        })}
+      />
+      <Stack.Screen
+        name='ApplicationDeepDive'
+        // props={{ }}
+        component={ApplicationDeepDive}
+        options={() => ({
+          title: 'Applications',
+          headerStyle: {
+            backgroundColor: '#433d3c',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        })}
+      />
+      <Stack.Screen
+        name='ShowResourcesInApplication'
+        // props={{ }}
+        component={ShowResourcesInApplication}
+        options={() => ({
+          title: 'Resource Details of Application',
           headerStyle: {
             backgroundColor: '#433d3c',
           },

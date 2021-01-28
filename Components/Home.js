@@ -5,7 +5,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 export default Home = ({ navigation, route }) => {
   const { raw, applications, resources } = route.params;
-  console.log(raw.slice(0, 10));
+
   return (
     <LinearGradient
       colors={['#007965', '#00af91']}

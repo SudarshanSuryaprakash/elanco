@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   ActivityIndicator,
+  Dimensions,
 } from 'react-native';
 
 import { LinearGradient } from 'expo-linear-gradient';
@@ -80,6 +81,33 @@ export default Home = ({ navigation }) => {
               }
             >
               <Text style={styles.costsText}>Applications</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={{ flex: 1 }}>
+            <TouchableOpacity
+              style={{
+                ...styles.costsButton,
+                backgroundColor: '#a6f0c6',
+                //   marginBottom: 150,
+                width: Dimensions.get('window').width / 2,
+              }}
+              onPress={() =>
+                navigation.navigate('ApplicationDeepDive', {
+                  raw,
+                  applications,
+                  resources,
+                })
+              }
+            >
+              <Text
+                style={{
+                  ...styles.costsText,
+                  color: '#493323',
+                  textAlign: 'center',
+                }}
+              >
+                Application Deep Dive
+              </Text>
             </TouchableOpacity>
           </View>
         </View>

@@ -26,7 +26,6 @@ export default function Graph({ navigation, route }) {
   const [finished, setFinished] = useState(false);
 
   const [resourceDetails, setResourceDetails] = useState({});
-  const [topFive, setTopFive] = useState([]);
 
   const { raw, applications, resources } = route.params;
 
@@ -149,13 +148,7 @@ export default function Graph({ navigation, route }) {
         }
       }
     }
-  }, [
-    resources,
-    finalCostData,
-    finalQuantityData,
-    resourceDetails,
-    applications,
-  ]);
+  }, [finalCostData, finalQuantityData, resourceDetails]);
 
   //console.log(flag);
 
@@ -220,7 +213,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#00af91',
   },
   legendText: {
-    // color: 'rgb(26, 255, 146)',
     color: 'black',
     fontWeight: 'bold',
   },
@@ -237,7 +229,7 @@ const styles = StyleSheet.create({
   },
   totalText: {
     color: '#80ffdb',
-    //color: 'rgb(26, 255, 146)',
+
     position: 'absolute',
     right: 10,
     top: 20,
