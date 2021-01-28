@@ -3,7 +3,9 @@ import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 
 import { LinearGradient } from 'expo-linear-gradient';
 
-export default Home = ({ navigation }) => {
+export default Home = ({ navigation, route }) => {
+  const { raw, applications, resources } = route.params;
+  console.log(raw.slice(0, 10));
   return (
     <LinearGradient
       colors={['#007965', '#00af91']}
@@ -12,19 +14,33 @@ export default Home = ({ navigation }) => {
     >
       <View style={styles.container}>
         <View style={styles.headContainer}>
-          <Text style={styles.headText}>Welcome to the Elanco Data Matrix</Text>
+          <Text style={styles.headText}>Choose your path</Text>
         </View>
         <View style={styles.pillsContainer}>
           <TouchableOpacity
             style={{ ...styles.costsButton, backgroundColor: '#c70039' }}
-            onPress={() => navigation.navigate('Graph', { display: 'cost' })}
+            onPress={() =>
+              navigation.navigate('Graph', {
+                display: 'cost',
+                main: route.params.main,
+                raw,
+                applications,
+                resources,
+              })
+            }
           >
             <Text style={styles.costsText}>Costs</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={{ ...styles.costsButton, backgroundColor: '#19456b' }}
             onPress={() =>
-              navigation.navigate('Graph', { display: 'quantity' })
+              navigation.navigate('Graph', {
+                display: 'quantity',
+                main: route.params.main,
+                raw,
+                applications,
+                resources,
+              })
             }
           >
             <Text style={styles.costsText}>Quantities</Text>

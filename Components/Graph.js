@@ -16,6 +16,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { LineChart } from 'react-native-chart-kit';
 
 export default function Graph({ navigation, route }) {
+  const { main } = route.params;
   const [graphLabels, setGraphLabels] = useState([]);
   const [finalCostData, setFinalCostData] = useState([]);
   const [finalQuantityData, setFinalQuantityData] = useState([]);
@@ -23,67 +24,78 @@ export default function Graph({ navigation, route }) {
   const [totalCost, setTotalCost] = useState(0);
   const [totalQuantity, setTotalQuantity] = useState(0);
   const [finished, setFinished] = useState(false);
-  const [raw, setRaw] = useState([]);
-  const [resources, setResources] = useState([]);
-  const [applications, setApplications] = useState([]);
 
   const [resourceDetails, setResourceDetails] = useState({});
+  const [topFive, setTopFive] = useState([]);
 
-  useEffect(() => {
-    //FUNCTION TO FETCH DATA FROM PROVIDED API
-    (async () => {
-      const res = await fetch(
-        'https://engineering-task.elancoapps.com/api/raw'
-      );
-      const rawTemp = await res.json();
-
-      setRaw(rawTemp);
-      const res2 = await fetch(
-        'https://engineering-task.elancoapps.com/api/resources'
-      );
-      const resourcesTemp = await res2.json();
-      setResources(resourcesTemp);
-
-      const res3 = await fetch(
-        'https://engineering-task.elancoapps.com/api/applications'
-      );
-      const applicationsTemp = await res3.json();
-      setApplications(applicationsTemp);
-    })();
-  }, []);
+  const { raw, applications, resources } = route.params;
 
   useEffect(() => {
     let count = 0;
     let labels = [];
-    resources.forEach(async (resource) => {
-      count = count + 1;
-      labels.push(count);
-      let obj = {};
-      const filteredResource = raw.filter((item) => {
-        return item.MeterCategory === resource;
-      });
+    if (main === 'resource') {
+      resources.forEach(async (resource) => {
+        count = count + 1;
+        labels.push(count);
+        let obj = {};
+        const filteredResource = raw.filter((item) => {
+          return item.MeterCategory === resource;
+        });
 
-      let cost = 0;
-      let quantity = 0;
-      filteredResource.map((item) => {
-        quantity = quantity + parseInt(item.ConsumedQuantity);
-        cost = cost + parseInt(item.Cost);
+        let cost = 0;
+        let quantity = 0;
+        filteredResource.map((item) => {
+          quantity = quantity + parseInt(item.ConsumedQuantity);
+          cost = cost + parseInt(item.Cost);
+        });
+
+        obj[resource] = { cost, quantity };
+        obj = Object.assign(resourceDetails, obj);
+        setResourceDetails(obj);
       });
-      obj[resource] = { cost, quantity };
-      obj = Object.assign(resourceDetails, obj);
-      setResourceDetails(obj);
-    });
+    } else {
+      applications.forEach(async (application) => {
+        count = count + 1;
+        labels.push(count);
+        let obj = {};
+        const filteredResource = raw.filter((item) => {
+          return item.ResourceGroup === application;
+        });
+
+        let cost = 0;
+        let quantity = 0;
+        filteredResource.map((item) => {
+          quantity = quantity + parseInt(item.ConsumedQuantity);
+          cost = cost + parseInt(item.Cost);
+        });
+
+        obj[application] = { cost, quantity };
+
+        obj = Object.assign(resourceDetails, obj);
+        setResourceDetails(obj);
+      });
+    }
+
     setGraphLabels(labels);
-  }, [raw, resources]);
+  }, [raw, resources, applications]);
 
   const setData = (temp) => {
     if (Object.keys({}) !== Object.keys(resourceDetails)) {
       const data = [];
-      if (resources.length) {
-        resources.forEach((resource) => {
-          data.push(resourceDetails[resource][temp]);
-        });
+      if (main === 'resource') {
+        if (resources.length) {
+          resources.forEach((resource) => {
+            data.push(resourceDetails[resource][temp]);
+          });
+        }
+      } else {
+        if (applications.length) {
+          applications.forEach((application) => {
+            data.push(resourceDetails[application][temp]);
+          });
+        }
       }
+
       return data;
     }
   };
@@ -103,12 +115,10 @@ export default function Graph({ navigation, route }) {
   };
 
   const chartConfig = {
-    // backgroundGradientFrom: '#1E2923',
-    // backgroundGradientTo: '#08130D',
     backgroundGradientFrom: '#007965',
     backgroundGradientTo: '#00af91',
-    //color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
-    color: (opacity = 1) => `#80ffdb`,
+
+    color: () => `#80ffdb`,
   };
 
   useEffect(() => {
@@ -121,6 +131,7 @@ export default function Graph({ navigation, route }) {
       if (route.params.display === 'cost') {
         if (finalCostData[0] !== undefined && finished === false) {
           let tc = 0;
+
           finalCostData.map((item) => {
             tc = tc + item;
           });
@@ -138,17 +149,18 @@ export default function Graph({ navigation, route }) {
         }
       }
     }
-  }, [resources, finalCostData, finalQuantityData]);
+  }, [
+    resources,
+    finalCostData,
+    finalQuantityData,
+    resourceDetails,
+    applications,
+  ]);
 
   //console.log(flag);
 
   return (
-    <LinearGradient
-      // Background Linear Gradient
-      //colors={['#1E2923', '#08130D']}
-      colors={['#00af91', '#007965']}
-      style={{ flex: 1 }}
-    >
+    <LinearGradient colors={['#00af91', '#007965']} style={{ flex: 1 }}>
       <View style={styles.container}>
         {flag === true ? (
           <View>
@@ -161,12 +173,22 @@ export default function Graph({ navigation, route }) {
             />
             <TouchableOpacity
               style={styles.legendButton}
-              onPress={() =>
-                navigation.navigate('Legend', {
-                  resources,
-                  finalCostData,
-                  finalQuantityData,
-                })
+              onPress={
+                main === 'resource'
+                  ? () =>
+                      navigation.navigate('Legend', {
+                        main: resources,
+
+                        finalCostData,
+                        finalQuantityData,
+                      })
+                  : () =>
+                      navigation.navigate('Legend', {
+                        main: applications,
+
+                        finalCostData,
+                        finalQuantityData,
+                      })
               }
             >
               <Text style={styles.legendText}>Legend</Text>

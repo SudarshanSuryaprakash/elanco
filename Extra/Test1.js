@@ -50,6 +50,7 @@ export default function Graph({ navigation, route }) {
       );
       const applicationsTemp = await res3.json();
       setApplications(applicationsTemp);
+      console.log(rawTemp);
     })();
   }, []);
 
@@ -165,7 +166,7 @@ export default function Graph({ navigation, route }) {
     }
   }, [resources, finalCostData, finalQuantityData]);
 
-  console.log(flag);
+  //console.log(flag);
 
   return (
     <LinearGradient

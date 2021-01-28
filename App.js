@@ -7,6 +7,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import Graph from './Components/Graph';
 import Home from './Components/Home';
+import FirstScreen from './Components/FirstScreen';
 import Legend from './Components/Legend';
 import ResourceDetails from './Components/ResourceDetails';
 import Test1 from './Extra/Test1';
@@ -18,6 +19,21 @@ import { LinearGradient } from 'expo-linear-gradient';
 export default function App() {
   createHomeStack = () => (
     <Stack.Navigator>
+      <Stack.Screen
+        name='FirstScreen'
+        // props={{ }}
+        component={FirstScreen}
+        options={() => ({
+          title: 'Elanco',
+          headerStyle: {
+            backgroundColor: '#433d3c',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        })}
+      />
       <Stack.Screen
         name='Home'
         // props={{ }}
@@ -84,7 +100,7 @@ export default function App() {
       {/* <LinearGradient colors={['#1E2923', '#08130D']} style={styles.background}> */}
       <NavigationContainer>{createHomeStack()}</NavigationContainer>
     </LinearGradient>
-    // <Test1 />
+    //<Test1 />
   );
 }
 

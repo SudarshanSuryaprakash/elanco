@@ -10,22 +10,11 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 
 export default Legend = ({ route, navigation }) => {
-  const [resources, setResources] = useState([]);
-
-  useEffect(() => {
-    //FUNCTION TO FETCH DATA FROM PROVIDED API
-    (async () => {
-      const res2 = await fetch(
-        'https://engineering-task.elancoapps.com/api/resources'
-      );
-      const resourcesTemp = await res2.json();
-      setResources(resourcesTemp);
-    })();
-  }, []);
+  const { main } = route.params;
 
   const numberedResources = () => {
     let count = 0;
-    return resources.map((item) => {
+    return main.map((item) => {
       count = count + 1;
       return count + '. ' + item;
     });
