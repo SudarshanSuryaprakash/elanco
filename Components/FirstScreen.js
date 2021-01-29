@@ -44,15 +44,15 @@ export default Home = ({ navigation }) => {
 
   return (
     <LinearGradient
-      colors={['#007965', '#00af91']}
-      //colors={['#1E2923', '#08130D']}
+      //colors={['#007965', '#00af91']}
+      colors={['#ffeebb', '#fdffbc']}
       style={{ flex: 1 }}
     >
       {raw.length && applications.length && resources.length ? (
         <View style={styles.container}>
           <View style={styles.headContainer}>
             <Text style={styles.headText}>
-              Welcome to the Elanco Data Matrix
+              Welcome to the Elanco Data Display
             </Text>
           </View>
           <View style={styles.pillsContainer}>
@@ -87,7 +87,7 @@ export default Home = ({ navigation }) => {
             <TouchableOpacity
               style={{
                 ...styles.costsButton,
-                backgroundColor: '#a6f0c6',
+                backgroundColor: '#f88f01',
                 //   marginBottom: 150,
                 width: Dimensions.get('window').width / 2,
               }}
@@ -102,7 +102,7 @@ export default Home = ({ navigation }) => {
               <Text
                 style={{
                   ...styles.costsText,
-                  color: '#493323',
+                  color: '#fdffbc',
                   textAlign: 'center',
                 }}
               >
@@ -117,10 +117,9 @@ export default Home = ({ navigation }) => {
             justifyContent: 'center',
             alignItems: 'center',
             flex: 1,
-            backgroundColor: 'black',
           }}
         >
-          <ActivityIndicator />
+          <ActivityIndicator size='large' color='#58391c' />
         </View>
       )}
     </LinearGradient>
@@ -141,7 +140,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     height: 100,
     width: '100%',
-    backgroundColor: '#80ffdb',
+    backgroundColor: '#f0c38e',
     //backgroundColor: '#00af91',
     justifyContent: 'center',
     alignItems: 'center',
@@ -149,6 +148,9 @@ const styles = StyleSheet.create({
   },
   headText: {
     fontSize: 25,
+    fontWeight: 'bold',
+    color: '#58391c',
+    textAlign: 'center',
   },
   pillsContainer: {
     flex: 1,
@@ -158,7 +160,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   costsText: {
-    color: '#bee5d3',
+    color: '#fdffbc',
     fontWeight: 'bold',
     fontSize: 20,
   },

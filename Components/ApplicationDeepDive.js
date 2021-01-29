@@ -97,8 +97,8 @@ export default ({ route, navigation }) => {
 
   return (
     <LinearGradient
-      colors={['#007965', '#00af91']}
-      //colors={['#1E2923', '#08130D']}
+      //colors={['#007965', '#00af91']}
+      colors={['#ffeebb', '#fdffbc']}
       style={{ flex: 1 }}
     >
       <View style={styles.container}>
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
   },
   button: {
     //backgroundColor: '#8fcc5a',
-    backgroundColor: '#80ffdb',
+    backgroundColor: '#f0c38e',
     justifyContent: 'center',
     alignItems: 'center',
     height: 50,
@@ -131,5 +131,6 @@ const styles = StyleSheet.create({
   },
   text: {
     fontWeight: 'bold',
+    color: '#58391c',
   },
 });

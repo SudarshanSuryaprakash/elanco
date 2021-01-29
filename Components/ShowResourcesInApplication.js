@@ -8,12 +8,11 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 export default ({ route }) => {
   const { appData, app } = route.params;
-  console.log(appData);
 
   const renderResources = () => {
     return Object.keys(appData).map((resource) => {
       return (
-        <View style={styles.resourceContainer}>
+        <View style={styles.resourceContainer} key={resource}>
           <View style={styles.resourceHeadingContainer}>
             <Text style={styles.resourceHeading}>{resource}</Text>
           </View>
@@ -32,8 +31,8 @@ export default ({ route }) => {
 
   return (
     <LinearGradient
-      colors={['#007965', '#00af91']}
-      //colors={['#1E2923', '#08130D']}
+      //colors={['#007965', '#00af91']}
+      colors={['#ffeebb', '#fdffbc']}
       style={{ flex: 1 }}
     >
       <View style={styles.container}>
@@ -59,7 +58,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: HEIGHT / 10,
     justifyContent: 'center',
-    backgroundColor: '#80ffdb',
+    backgroundColor: '#f0c38e',
     borderRadius: 5,
     marginTop: 20,
     marginBottom: 20,
@@ -69,6 +68,7 @@ const styles = StyleSheet.create({
     fontSize: 34,
     fontWeight: 'bold',
     textAlign: 'center',
+    color: '#58391c',
   },
   subHeading: {
     alignItems: 'center',
@@ -77,13 +77,15 @@ const styles = StyleSheet.create({
   subHeadingText: {
     fontSize: 26,
     fontWeight: '600',
-    color: '#80ffdb',
+    //color: '#80ffdb',
   },
   resourceContainer: {
-    backgroundColor: '#a6f0c6',
+    backgroundColor: '#f4f5db',
     marginVertical: 10,
     width: Dimensions.get('window').width,
     borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#f0c38e',
   },
   resourceHeadingContainer: {
     alignItems: 'center',
@@ -91,6 +93,7 @@ const styles = StyleSheet.create({
   resourceHeading: {
     fontSize: 24,
     fontWeight: '700',
+    color: '#58391c',
   },
   detailsContainer: {
     flexDirection: 'row',

@@ -8,7 +8,7 @@ export default ({ route }) => {
     <LinearGradient
       // Background Linear Gradient
 
-      colors={['#00af91', '#007965']}
+      colors={['#ffeebb', '#fdffbc']}
       //colors={['#1E2923', '#08130D']}
       style={{ flex: 1 }}
     >
@@ -37,23 +37,24 @@ const styles = StyleSheet.create({
   },
   resourceContainer: {
     height: 100,
-    backgroundColor: '#80ffdb',
+    backgroundColor: '#f0c38e',
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
     margin: 30,
-    borderRadius: 5,
+    borderRadius: 15,
   },
   resourceText: {
     fontSize: 30,
     fontWeight: 'bold',
     textAlign: 'center',
+    color: 'black',
   },
   costContainer: {
     flexDirection: 'row',
     margin: 30,
     height: 80,
-    backgroundColor: '#80ffdb',
+    backgroundColor: '#6a492b',
     justifyContent: 'center',
     alignItems: 'center',
     width: '80%',
@@ -62,6 +63,7 @@ const styles = StyleSheet.create({
   costText: {
     fontSize: 20,
     fontWeight: 'bold',
+    color: '#fdffbc',
   },
   quantityContainer: {
     flexDirection: 'row',

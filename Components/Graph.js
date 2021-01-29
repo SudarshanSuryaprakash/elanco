@@ -114,10 +114,10 @@ export default function Graph({ navigation, route }) {
   };
 
   const chartConfig = {
-    backgroundGradientFrom: '#007965',
-    backgroundGradientTo: '#00af91',
+    backgroundGradientFrom: '#ffeebb',
+    backgroundGradientTo: '#fdffbc',
 
-    color: () => `#80ffdb`,
+    color: () => `#58391c`,
   };
 
   useEffect(() => {
@@ -153,7 +153,7 @@ export default function Graph({ navigation, route }) {
   //console.log(flag);
 
   return (
-    <LinearGradient colors={['#00af91', '#007965']} style={{ flex: 1 }}>
+    <LinearGradient colors={['#ffeebb', '#fdffbc']} style={{ flex: 1 }}>
       <View style={styles.container}>
         {flag === true ? (
           <View>
@@ -196,7 +196,7 @@ export default function Graph({ navigation, route }) {
             )}
           </View>
         ) : (
-          <ActivityIndicator color='#433d3c' size='large' />
+          <ActivityIndicator color='#58391c' size='large' />
         )}
         <Text style={styles.note}>Note: these are discrete values.</Text>
       </View>
@@ -210,17 +210,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
-    backgroundColor: '#00af91',
+    backgroundColor: '#fdffbc',
   },
   legendText: {
-    color: 'black',
+    color: '#f88f01',
     fontWeight: 'bold',
   },
   legendButton: {
     position: 'absolute',
     bottom: 500,
     right: 30,
-    backgroundColor: '#80ffdb',
+    backgroundColor: '#58391c',
     padding: 10,
     borderTopRightRadius: 10,
     borderTopLeftRadius: 10,
@@ -228,7 +228,7 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 10,
   },
   totalText: {
-    color: '#80ffdb',
+    color: '#58391c',
 
     position: 'absolute',
     right: 10,
@@ -240,6 +240,6 @@ const styles = StyleSheet.create({
     bottom: 30,
     right: 20,
     position: 'absolute',
-    color: 'white',
+    color: '#f88f01',
   },
 });

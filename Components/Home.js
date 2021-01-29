@@ -1,5 +1,11 @@
 import React from 'react';
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Dimensions,
+} from 'react-native';
 
 import { LinearGradient } from 'expo-linear-gradient';
 
@@ -8,7 +14,7 @@ export default Home = ({ navigation, route }) => {
 
   return (
     <LinearGradient
-      colors={['#007965', '#00af91']}
+      colors={['#ffeebb', '#fdffbc']}
       //colors={['#1E2923', '#08130D']}
       style={{ flex: 1 }}
     >
@@ -65,7 +71,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     height: 100,
     width: '100%',
-    backgroundColor: '#80ffdb',
+    backgroundColor: '#f0c38e',
     //backgroundColor: '#00af91',
     justifyContent: 'center',
     alignItems: 'center',
@@ -73,16 +79,19 @@ const styles = StyleSheet.create({
   },
   headText: {
     fontSize: 25,
+    fontWeight: 'bold',
+    color: '#58391c',
   },
   pillsContainer: {
-    flex: 1,
+    //flex: 1,
+    height: Dimensions.get('window').height / 2.6,
     width: '100%',
     justifyContent: 'space-around',
     alignItems: 'center',
     flexDirection: 'row',
   },
   costsText: {
-    color: '#bee5d3',
+    color: '#fdffbc',
     fontWeight: 'bold',
     fontSize: 20,
   },
