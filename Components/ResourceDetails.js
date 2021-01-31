@@ -3,15 +3,11 @@ import { Text, View, StyleSheet } from 'react-native';
 
 import { LinearGradient } from 'expo-linear-gradient';
 
+//Simply displays the Application/Resource name and the total cost/quantity passed in through Legend
+// which in turn got this information from graph.
 export default ({ route }) => {
   return (
-    <LinearGradient
-      // Background Linear Gradient
-
-      colors={['#ffeebb', '#fdffbc']}
-      //colors={['#1E2923', '#08130D']}
-      style={{ flex: 1 }}
-    >
+    <LinearGradient colors={['#ffeebb', '#fdffbc']} style={{ flex: 1 }}>
       <View style={styles.container}>
         <View style={styles.resourceContainer}>
           <Text style={styles.resourceText}>{route.params.resource}</Text>

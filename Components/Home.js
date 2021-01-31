@@ -1,3 +1,4 @@
+//############### EXTERNAL IMPORTS ##################
 import React from 'react';
 import {
   Text,
@@ -6,18 +7,15 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native';
-
 import { LinearGradient } from 'expo-linear-gradient';
+//############### END EXTERNAL IMPORTS ##################
 
 export default Home = ({ navigation, route }) => {
-  const { raw, applications, resources } = route.params;
+  //destructure the state from the previous screen
+  const { raw, applications, resources, main } = route.params;
 
   return (
-    <LinearGradient
-      colors={['#ffeebb', '#fdffbc']}
-      //colors={['#1E2923', '#08130D']}
-      style={{ flex: 1 }}
-    >
+    <LinearGradient colors={['#ffeebb', '#fdffbc']} style={{ flex: 1 }}>
       <View style={styles.container}>
         <View style={styles.headContainer}>
           <Text style={styles.headText}>Choose your path</Text>
@@ -27,8 +25,11 @@ export default Home = ({ navigation, route }) => {
             style={{ ...styles.costsButton, backgroundColor: '#c70039' }}
             onPress={() =>
               navigation.navigate('Graph', {
+                //Navigate to Graph, (where most of the calculations happen) and set the display to cost,
+                //send the main (which could be either "resource" or "application") from the previous component (FirstScreen)
+                //send the state (api data)
                 display: 'cost',
-                main: route.params.main,
+                main,
                 raw,
                 applications,
                 resources,
@@ -41,8 +42,11 @@ export default Home = ({ navigation, route }) => {
             style={{ ...styles.costsButton, backgroundColor: '#19456b' }}
             onPress={() =>
               navigation.navigate('Graph', {
+                //Navigate to Graph, (where most of the calculations happen) and set the display to quantity,
+                //send the main (which could be either "resource" or "application") from the previous component (FirstScreen)
+                //send the state (api data)
                 display: 'quantity',
-                main: route.params.main,
+                main,
                 raw,
                 applications,
                 resources,
@@ -63,16 +67,15 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    // justifyContent: 'center',
+
     alignItems: 'center',
-    //backgroundColor: 'black',
   },
   headContainer: {
     marginTop: 20,
     height: 100,
     width: '100%',
     backgroundColor: '#f0c38e',
-    //backgroundColor: '#00af91',
+
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
@@ -83,7 +86,6 @@ const styles = StyleSheet.create({
     color: '#58391c',
   },
   pillsContainer: {
-    //flex: 1,
     height: Dimensions.get('window').height / 2.6,
     width: '100%',
     justifyContent: 'space-around',

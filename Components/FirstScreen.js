@@ -1,3 +1,4 @@
+//############### EXTERNAL IMPORTS ##################
 import React, { useEffect, useState } from 'react';
 import {
   Text,
@@ -9,14 +10,18 @@ import {
 } from 'react-native';
 
 import { LinearGradient } from 'expo-linear-gradient';
+//############### END EXTERNAL IMPORTS ##################
 
 export default Home = ({ navigation }) => {
+  //raw is the raw api data.
   const [raw, setRaw] = useState([]);
+  //resources is the resources api data
   const [resources, setResources] = useState([]);
+  //applications is the applications api data
   const [applications, setApplications] = useState([]);
 
   useEffect(() => {
-    //FUNCTION TO FETCH DATA FROM PROVIDED API
+    //FUNCTION TO FETCH DATA FROM PROVIDED API AND SET RESPECTIVE STATE
     (async () => {
       try {
         const res = await fetch(
@@ -43,12 +48,9 @@ export default Home = ({ navigation }) => {
   }, []);
 
   return (
-    <LinearGradient
-      //colors={['#007965', '#00af91']}
-      colors={['#ffeebb', '#fdffbc']}
-      style={{ flex: 1 }}
-    >
+    <LinearGradient colors={['#ffeebb', '#fdffbc']} style={{ flex: 1 }}>
       {raw.length && applications.length && resources.length ? (
+        // (above) Making sure that the data is received from the api and the state is set. Otherwise - Line 119
         <View style={styles.container}>
           <View style={styles.headContainer}>
             <Text style={styles.headText}>
@@ -60,6 +62,7 @@ export default Home = ({ navigation }) => {
               style={{ ...styles.costsButton, backgroundColor: '#c70039' }}
               onPress={() =>
                 navigation.navigate('Home', {
+                  //Navigate to the Home screen, pass along the state, and set "main" to "resource"
                   main: 'resource',
                   raw,
                   applications,
@@ -73,6 +76,7 @@ export default Home = ({ navigation }) => {
               style={{ ...styles.costsButton, backgroundColor: '#19456b' }}
               onPress={() =>
                 navigation.navigate('Home', {
+                  //Navigate to the Home screen, pass along the state, and set "main" to "application"
                   main: 'application',
                   raw,
                   applications,
@@ -88,11 +92,11 @@ export default Home = ({ navigation }) => {
               style={{
                 ...styles.costsButton,
                 backgroundColor: '#f88f01',
-                //   marginBottom: 150,
                 width: Dimensions.get('window').width / 2,
               }}
               onPress={() =>
                 navigation.navigate('ApplicationDeepDive', {
+                  //Navigate to ApplicationDeepDive and pass the state along
                   raw,
                   applications,
                   resources,
@@ -112,6 +116,7 @@ export default Home = ({ navigation }) => {
           </View>
         </View>
       ) : (
+        //If the state is not set, Display a loading indicator
         <View
           style={{
             justifyContent: 'center',

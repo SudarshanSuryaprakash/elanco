@@ -9,6 +9,8 @@ import {
 
 import { LinearGradient } from 'expo-linear-gradient';
 
+//Simply shows a list of all the resources/applications (based on what was passed in as "main" from the Graph screen)
+//Passes in the total cost and quantity to the Resourcedetail screen
 export default Legend = ({ route, navigation }) => {
   const { main } = route.params;
 
@@ -21,12 +23,7 @@ export default Legend = ({ route, navigation }) => {
   };
 
   return (
-    <LinearGradient
-      // Background Linear Gradient
-      // colors={['#1E2923', '#08130D']}
-      colors={['#ffeebb', '#fdffbc']}
-      style={{ flex: 1 }}
-    >
+    <LinearGradient colors={['#ffeebb', '#fdffbc']} style={{ flex: 1 }}>
       <View style={styles.mainContainer}>
         <ScrollView style={styles.container}>
           {numberedResources().map((item, index) => {
@@ -62,9 +59,6 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    // justifyContent: 'center',
-    //alignItems: 'center',
-    //backgroundColor: '#1E2923',
   },
   item: {
     backgroundColor: '#7ec263',
@@ -73,7 +67,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
   },
   resourceButton: {
-    //backgroundColor: '#8fcc5a',
     backgroundColor: '#f0c38e',
     justifyContent: 'center',
     alignItems: 'center',

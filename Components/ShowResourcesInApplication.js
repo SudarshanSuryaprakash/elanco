@@ -7,8 +7,10 @@ const WIDTH = Dimensions.get('window').width;
 import { LinearGradient } from 'expo-linear-gradient';
 
 export default ({ route }) => {
+  //get the current applications' data from the ApplicationDeepDive component
   const { appData, app } = route.params;
 
+  //Simply display the data
   const renderResources = () => {
     return Object.keys(appData).map((resource) => {
       return (
@@ -30,11 +32,7 @@ export default ({ route }) => {
   };
 
   return (
-    <LinearGradient
-      //colors={['#007965', '#00af91']}
-      colors={['#ffeebb', '#fdffbc']}
-      style={{ flex: 1 }}
-    >
+    <LinearGradient colors={['#ffeebb', '#fdffbc']} style={{ flex: 1 }}>
       <View style={styles.container}>
         <View style={styles.heading}>
           <Text style={styles.headingText}>{app}</Text>

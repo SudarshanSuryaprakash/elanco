@@ -1,24 +1,44 @@
+//###############EXTERNAL IMPORTS##################
+
 import React from 'react';
 import { StyleSheet } from 'react-native';
-
 import { NavigationContainer } from '@react-navigation/native';
-
+import { LinearGradient } from 'expo-linear-gradient';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import Graph from './Components/Graph';
-import Home from './Components/Home';
-import FirstScreen from './Components/FirstScreen';
-import Legend from './Components/Legend';
-import ResourceDetails from './Components/ResourceDetails';
-import ApplicationDeepDive from './Components/ApplicationDeepDive';
-import ShowResourcesInApplication from './Components/ShowResourcesInApplication';
-import Test1 from './Extra/Test1';
+//###############END EXTERNAL IMPORTS##################
 
+//###############INTERNAL IMPORTS##################
+//The screen that shows a graph (either resource data or application data based on the props passed into it)
+import Graph from './Components/Graph';
+
+//The screen that lets you choose between Cost and Quantities
+import Home from './Components/Home';
+
+//The screen that lets you choose between Resources, Applications and Application Deep Dive
+import FirstScreen from './Components/FirstScreen';
+
+//The Screen that shows the Resources/Applications once the legend button is clicked
+import Legend from './Components/Legend';
+
+//The screen that shows the cost and quantities of each Resource or Application based on which screen you came through
+import ResourceDetails from './Components/ResourceDetails';
+
+//The Application Deep Dive Screen which shows all the applications
+import ApplicationDeepDive from './Components/ApplicationDeepDive';
+
+//The screen that shows all the resources used by a particular application
+import ShowResourcesInApplication from './Components/ShowResourcesInApplication';
+
+//###############END INTERNAL IMPORTS##################
+
+//Creating the Stack navigator to move around the application
 const Stack = createStackNavigator();
 
-import { LinearGradient } from 'expo-linear-gradient';
-
 export default function App() {
+  //Create home stack simply gives the app information about all the screens
+  //- and what "name" to use to navigate from one screen to another
+
   createHomeStack = () => (
     <Stack.Navigator>
       <Stack.Screen
@@ -129,10 +149,8 @@ export default function App() {
 
   return (
     <LinearGradient colors={['#f4f5db', '#d9dab0']} style={styles.background}>
-      {/* <LinearGradient colors={['#1E2923', '#08130D']} style={styles.background}> */}
       <NavigationContainer>{createHomeStack()}</NavigationContainer>
     </LinearGradient>
-    //<Test1 />
   );
 }
 
