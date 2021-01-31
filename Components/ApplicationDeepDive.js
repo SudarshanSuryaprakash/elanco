@@ -33,6 +33,7 @@ export default ({ route, navigation }) => {
       //copy into obj all the already assigned resources from the state
       obj = Object.assign(resourceDetails, obj);
       //set the state with the new resource included in the resourceDetails
+
       setResourceDetails(obj);
     });
 
@@ -45,6 +46,7 @@ export default ({ route, navigation }) => {
 
       obj[application] = filteredResource;
       obj = Object.assign(applicationDetails, obj);
+
       setApplicationDetails(obj);
     });
     getApplicationDeepData();
@@ -90,6 +92,7 @@ export default ({ route, navigation }) => {
         }
       }
     }
+
     //finally, set the application deep info to finalAppData
     setFinalAppData(applicationDeepInfo);
   };

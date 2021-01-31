@@ -123,12 +123,11 @@ export default function Graph({ navigation, route }) {
       const data = []; //initializing the data array
       if (main === 'resource') {
         //If the user had selected "resources",
-        if (resources.length) {
-          //pushing either cost or quantity of each resource into data[]
-          resources.forEach((resource) => {
-            data.push(resourceDetails[resource][costOrQuantity]);
-          });
-        }
+
+        //pushing either cost or quantity of each resource into data[]
+        resources.forEach((resource) => {
+          data.push(resourceDetails[resource][costOrQuantity]);
+        });
       } else {
         //do the same if the user selected applications, except go through each application
         if (applications.length) {
