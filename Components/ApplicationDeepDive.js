@@ -16,6 +16,7 @@ export default ({ route, navigation }) => {
   const [flag, setFlag] = useState(false);
 
   const [finalAppData, setFinalAppData] = useState({});
+  console.log(finalAppData);
 
   //Filters the raw data by application and resource and sets applicationDetails and resourceDetails respectively
   useEffect(() => {

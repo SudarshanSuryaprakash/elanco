@@ -6,11 +6,12 @@ import {
   View,
   TouchableOpacity,
   ActivityIndicator,
+  ScrollView,
 } from 'react-native';
 
 import { Dimensions } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { LineChart } from 'react-native-chart-kit';
+import { LineChart, BarChart } from 'react-native-chart-kit';
 
 //############### END EXTERNAL IMPORTS ##################
 
@@ -203,10 +204,10 @@ export default function Graph({ navigation, route }) {
     <LinearGradient colors={['#ffeebb', '#fdffbc']} style={{ flex: 1 }}>
       <View style={styles.container}>
         {flag === true ? ( //Checking if all the data is ready to be displayed
-          <View>
-            <LineChart
+          <ScrollView horizontal={true}>
+            <BarChart
               data={setGraphData()}
-              width={screenWidth}
+              width={main === 'resource' ? screenWidth * 3 : screenWidth * 5}
               height={screenHeight / 1}
               chartConfig={chartConfig}
               bezier
@@ -247,11 +248,11 @@ export default function Graph({ navigation, route }) {
                 Total Quantity: {totalQuantity}
               </Text>
             )}
-          </View>
+          </ScrollView>
         ) : (
           <ActivityIndicator color='#58391c' size='large' />
         )}
-        <Text style={styles.note}>Note: these are discrete values.</Text>
+        {/* <Text style={styles.note}>Note: these are discrete values.</Text> */}
       </View>
     </LinearGradient>
   );
@@ -259,11 +260,10 @@ export default function Graph({ navigation, route }) {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: screenHeight / 9.6,
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
-    backgroundColor: '#fdffbc',
+    //backgroundColor: '#fdffbc',
   },
   legendText: {
     color: '#f88f01',
